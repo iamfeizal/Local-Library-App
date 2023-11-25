@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: GoogleFonts.montserrat().fontFamily
       ),
-      home: SplashScreen(),
+      home: BottomNavBar(),
     );
   }
 }

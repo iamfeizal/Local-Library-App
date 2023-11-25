@@ -22,8 +22,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
-          unselectedItemColor: Colors.grey.withOpacity(0.4),
-          selectedItemColor: Colors.red,
+          unselectedItemColor: Color(0xFFE65C4F).withOpacity(0.4),
+          selectedItemColor: Color(0xFFE65C4F),
           currentIndex: currentIndex,
           onTap: (index) => setState(() => currentIndex = index),
           items: [

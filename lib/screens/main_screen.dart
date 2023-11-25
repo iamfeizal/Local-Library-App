@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:local_library_app/widgets/category_banner.dart';
+import 'package:local_library_app/widgets/main_banner.dart';
+import 'package:local_library_app/widgets/trending_banner.dart';
 
+import '../widgets/book_card.dart';
 import 'detail_screen.dart';
 import '../models/books_data.dart';
 
@@ -12,20 +16,14 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Data Buku', style: GoogleFonts.montserrat(),),
+          title: Text('Books'),
         ),
         body: LayoutBuilder(
           builder: (context, constraints) {
             if (constraints.maxWidth <=700){
-              return BooksGrid(gridCount: 2,);
-            } else if (constraints.maxWidth <=950) {
-              return BooksGrid(gridCount: 3,);
-            } else if (constraints.maxWidth <=1200) {
-              return BooksGrid(gridCount: 4,);
-            } else if (constraints.maxWidth <=1400) {
-              return BooksGrid(gridCount: 5,);
+              return BooksGrid();
             } else {
-              return BooksGrid(gridCount: 6,);
+              return BooksGrid();
             }
           },
         )
@@ -33,72 +31,166 @@ class MainScreen extends StatelessWidget {
   }
 }
 
-class BooksGrid extends StatelessWidget {
-  final int gridCount;
-  const BooksGrid({super.key, required this.gridCount});
+class BooksGrid extends StatefulWidget {
+  const BooksGrid({super.key});
 
   @override
+  State<BooksGrid> createState() => _BooksGridState();
+}
+
+class _BooksGridState extends State<BooksGrid> {
+  @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: bookList.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: gridCount,
-        childAspectRatio: 0.55,
-      ),
-      itemBuilder: (context, index) {
-        var book = bookList[index];
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => DetailScreen(
-                  book: book,
-                ),
-              ),
-            );
-          },
-          child: Container(
-            margin: EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Card(
-              child: Column(
+    return Scaffold(
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            MainBanner(),
+            SizedBox(height: 5),
+            CategoryBanner(),
+            SizedBox(height: 5),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
                 children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height / 3,
-                    child: Hero(
-                      tag: book.title,
-                      child: Image.network(
-                        book.imageLink,
-                        fit: BoxFit.fitHeight,
-                      ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/images/mom.jpg',
+                      text1: 'Amma Vanthaal',
+                      text2: 'Janaki Raman',
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                        book.title,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.montserrat(fontSize: 14, fontWeight: FontWeight.bold)
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/images/thippu.jpg',
+                      text1: 'Thippu Sulthaan',
+                      text2: 'Arshiya',
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    child: Text(
-                        book.author,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.montserrat(fontSize: 12, fontWeight: FontWeight.w200)
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/images/kural.jpeg',
+                      text1: 'Thiruvalluvar',
+                      text2: 'Gauthama Sanna',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/images/ponniyin.jpg',
+                      text1: 'Ponniyin Selvan',
+                      text2: 'Kalki',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/images/raja.jpg',
+                      text1: 'Raja Raja Cholan',
+                      text2: 'Kannan',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/images/richdad.jpg',
+                      text1: 'Rich Dad poor Dad',
+                      text2: 'Robert',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/images/vekkai.jpg',
+                      text1: 'Vekkai',
+                      text2: 'Poomani',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/images/wings.jpg',
+                      text1: 'Wings of Fire',
+                      text2: 'Dr. Kalam',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/images/money.jpg',
+                      text1: 'Physiology of money',
+                      text2: 'Morgan',
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        );
-      },
+            SizedBox(height: 10),
+            TrendingBanner(),
+            SizedBox(height: 15),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/english/bts.jpg',
+                      text1: 'BTS Army',
+                      text2: 'Bts',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/english/slauter.jpg',
+                      text1: 'Slaughter',
+                      text2: 'Ryan & Albert',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/english/heart.jpg',
+                      text1: 'Heart of Happiness',
+                      text2: 'Dalai Lama',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/english/smarter.jpg',
+                      text1: 'The Power of Habit',
+                      text2: 'Charles Duhigg',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/english/magic.jpg',
+                      text1: 'Magic of Thinking',
+                      text2: 'Mark Swartz',
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {},
+                    child: BookCard(
+                      imagepic: 'assets/english/subtle.jpg',
+                      text1: 'The Subtle Art',
+                      text2: 'Mark Manson',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20)
+          ],
+        ),
+      ),
     );
   }
 }
-
