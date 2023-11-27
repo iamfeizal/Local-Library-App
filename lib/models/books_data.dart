@@ -45,7 +45,7 @@ var bookList = [
     pages: 256,
     title: "Molloy, Malone Dies, The Unnamable, the trilogy",
     year: 1952,
-    isBookmarked: true,
+    isBookmarked: false,
   ),
   BookData(
     author: "Jorge Luis Borges",
@@ -57,7 +57,7 @@ var bookList = [
     pages: 224,
     title: "Ficciones",
     year: 1965,
-    isBookmarked: false,
+    isBookmarked: true,
   ),
   BookData(
     author: "Emily Bront",
@@ -69,7 +69,7 @@ var bookList = [
     pages: 342,
     title: "Wuthering Heights",
     year: 1847,
-    isBookmarked: true,
+    isBookmarked: false,
   ),
   BookData(
     author: "Albert Camus",
@@ -93,7 +93,7 @@ var bookList = [
     pages: 320,
     title: "Nostromo",
     year: 1904,
-    isBookmarked: false,
+    isBookmarked: true,
   ),
   BookData(
     author: "Louis-Ferdinand Céline",

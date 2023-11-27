@@ -18,10 +18,9 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
         fontFamily: GoogleFonts.montserrat().fontFamily
       ),
-      home: BottomNavBar(),
+      home: const SplashScreen(),
     );
   }
 }
@@ -32,12 +31,12 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
-      backgroundColor: Color(0xff633a88),
-      splash: Container(
+      backgroundColor: Colors.deepPurple,
+      splash: const SizedBox(
         height: double.infinity,
         width: double.infinity,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 35, 8, 0),
+          padding: EdgeInsets.fromLTRB(8, 35, 8, 0),
           child: Column(
             children: [
               Icon(Icons.book_rounded, size: 150, color: Colors.white,),
@@ -60,7 +59,7 @@ class SplashScreen extends StatelessWidget {
           ),
         ),
       ),
-      nextScreen: BottomNavBar(),
+      nextScreen: const BottomNavBar(),
       splashIconSize: 350,
       duration: 1000,
       splashTransition: SplashTransition.sizeTransition,

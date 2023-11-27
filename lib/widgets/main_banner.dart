@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:local_library_app/models/books_data.dart';
+
+import '../screens/detail_screen.dart';
 
 class MainBanner extends StatelessWidget {
   const MainBanner({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var bookBanner = bookList[0];
+    double widthBanner = MediaQuery.of(context).size.width - 40;
     DateTime now = DateTime.now();
     var timeNow = int.parse(DateFormat('kk').format(now));
     var message = '';
@@ -28,99 +33,122 @@ class MainBanner extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Container(
-                height: 260,
-                width: 370,
+                height: 250,
+                width: widthBanner,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/images/bookfly.jpg'),
-                    fit: BoxFit.fill,
+                    image: NetworkImage(bookBanner.imageLink),
+                    fit: BoxFit.fitWidth,
                     colorFilter: ColorFilter.mode(
-                      Color(0xFFE65C4F).withOpacity(0.85),
+                      Colors.grey.withOpacity(0.85),
                       BlendMode.srcATop,
                     ),
                   ),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: Column(
-                    children: [
-                      Text(
-                        message,
-                        style: TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFFE9EEF4),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DetailScreen(
+                          book: bookBanner,
                         ),
                       ),
-                      SizedBox(height: 5),
-                      Text(
-                        'Which book suits your\ncurrent mood?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w300,
-                          color: Color(0xFFE9EEF4).withOpacity(0.7),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: Column(
+                      children: [
+                        Text(
+                          message,
+                          style: const TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
                         ),
-                      )
-                    ],
+                        const SizedBox(height: 5),
+                        Text(
+                          'Which book suits with your current mood?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.black.withOpacity(0.75),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
               Positioned(
                 bottom: 10,
-                child: Container(
-                  height: 100,
-                  width: 340,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFE9EEF4),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10),
-                        child: Container(
-                          height: 80,
-                          width: 80,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Color(0xFFE65C4F),
-                            image: DecorationImage(
-                              image: AssetImage('assets/images/kural.jpeg'),
-                              fit: BoxFit.fill,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DetailScreen(
+                          book: bookBanner,
+                        ),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 100,
+                    width: widthBanner - 40,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Container(
+                            height: 80,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.deepPurple,
+                              image: DecorationImage(
+                                image: NetworkImage(bookBanner.imageLink),
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25, left: 20),
-                        child: Column(
-                          children: [
-                            Text(
-                              'History of Thiruvalluvar',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: Color(0xFF484848),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                              const EdgeInsets.only(top: 10, right: 30),
-                              child: Text(
-                                'Author: Gaunthama Sannu',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xFF484848).withOpacity(0.7),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                                Text(
+                                  bookBanner.title,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                                const SizedBox(height: 10,),
+                                Text(
+                                  'Author: ${bookBanner.author}',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.normal,
+                                    color: Colors.black.withOpacity(0.7),
+                                  ),
+                                ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )

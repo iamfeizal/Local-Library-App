@@ -12,8 +12,8 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int currentIndex = 0;
   final screens = [
-    MainScreen(),
-    BookmarkScreen(),
+    const MainScreen(),
+    const BookmarkScreen(),
   ];
 
   @override
@@ -22,11 +22,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
       body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.shifting,
-          unselectedItemColor: Color(0xFFE65C4F).withOpacity(0.4),
-          selectedItemColor: Color(0xFFE65C4F),
+          unselectedItemColor: Colors.deepPurple.withOpacity(0.4),
+          selectedItemColor: Colors.deepPurple,
           currentIndex: currentIndex,
           onTap: (index) => setState(() => currentIndex = index),
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home_rounded,),
               label: 'Home',

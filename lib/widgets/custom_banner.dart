@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class TrendingBanner extends StatelessWidget {
-  const TrendingBanner({super.key});
+  final String customText;
+  const TrendingBanner({super.key, required this.customText});
 
   @override
   Widget build(BuildContext context) {
@@ -16,31 +17,20 @@ class TrendingBanner extends StatelessWidget {
               height: 30,
               width: 110,
               decoration: BoxDecoration(
-                color: Colors.deepOrange,
+                color: Colors.deepPurple,
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Text(
-                'Top Trends',
-                style: TextStyle(
+                customText,
+                style: const TextStyle(
                   fontSize: 14,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 5, left: 200),
-          child: Text(
-            'See all',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              color: Color(0xFF484848),
-            ),
-          ),
-        )
       ],
     );
   }
